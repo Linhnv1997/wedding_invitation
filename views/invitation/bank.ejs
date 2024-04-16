@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0,minimal-ui">
+    <title>Bank information</title>
+    <meta content="Admin Dashboard" name="description">
+    <link rel="shortcut icon" href="/assets/images/shortcut-icon.jpg" />
+    <meta content="Themesbrand" name="author">
+    <link rel="shortcut icon" href="assets/images/favicon.ico">
+    <link href="/assets/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+    <link href="/assets/css/metismenu.min.css" rel="stylesheet" type="text/css">
+    <link href="/assets/css/icons.css" rel="stylesheet" type="text/css">
+    <link href="/assets/css/style.css" rel="stylesheet" type="text/css">
+    <link href="/assets/css/invitation.css" rel="stylesheet" type="text/css" />
+    <link href="/plugins/toastr/toastr.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+    <!-- Begin page -->
+    <div class="container">
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="row justify-content-center mb-1">
+                        <div class="col-lg-5">
+                            <div class="text-center faq-title mb-0">
+                                <!-- <div class="pt-3 mb-0"><i class="ti-comments text-primary h3"></i></div> -->
+                                <h5>Nếu Quý Khách không thể tham dự?</h5>
+                                <p class="text-muted mt-0">Dưới đây là thông tin tài khoản ngân hàng của chúng tôi.</p>
+                                    <!-- <a href="mailto:<%= data.cfg.male.email %>">
+                                    <button type="button" class="btn btn-primary m-t-10 mr-1 waves-effect waves-light">
+                                        Gửi email
+                                    </button>
+                                </a>
+                                <a href="tel:<%= data.cfg.male.phone %>">
+                                    <button type="button" class="btn btn-success m-t-10 waves-effect waves-light">
+                                        Gọi điện
+                                    </button>
+                                </a> -->
+
+                            </div>
+                        </div>
+                    </div>
+                    <!-- end row -->
+                    <div class="row justify-content-center">
+                        <div class="col-lg-5  mb-1">
+                            <h5 class="mt-0 font-18 mb-1"><i class="ti-agenda text-primary mr-2"></i>Nhà trai</h5>
+                            <div class="accordion" id="accordionExample"> 
+                                <% for (var i = 0, len =  data.cfg.male.finances.length ; i < len; i++) {%>
+                                    <div class="card mb-0">
+                                        <a data-toggle="collapse" href="#collapse_<%= i %>" class="faq <%=  i == 0 ? 'collapsed' : '' %>" aria-expanded="true"
+                                            aria-controls="collapse_<%= i %>">
+                                            <div class="card-header text-dark" id="heading_<%= i %>">
+                                                <h6 class="m-0 faq-question"><%= data.cfg.male.finances[i].provider_name %></h6>
+                                            </div>
+                                        </a>
+                                        <div id="collapse_<%= i %>" class="collapse <%=  i == 0 ? 'show' : '' %>" aria-labelledby="heading_<%= i %>"
+                                            data-parent="#accordionExample">
+                                            <div class="card-body copy">
+                                                <p class="text-muted mb-0 faq-ans">
+                                                    STK: <b><%= data.cfg.male.finances[i].provider_number %></b>
+                                                    <br>
+                                                    NAME: <%= data.cfg.male.finances[i].holder_name %>
+                                                    <img src="<%= data.cfg.male.finances[i].male_bank %>" alt="Male Bank" style="max-width: 250px; height: auto;">
+                                                </p>
+                                                <div class="copy">
+                                                    <button
+                                                        class="btn btn-primary dropdown-toggle arrow-none waves-effect waves-light"
+                                                        type="button" data-toggle="dropdown" aria-haspopup="true"
+                                                        aria-expanded="false" data-clipboard-text="<%= data.cfg.male.finances[i].provider_number %>">
+                                                        <i class="fas fa-copy mr-2"></i>
+                                                        Copy
+                                                    </button>
+                                                </div>
+                                            </div>
+    
+                                        </div>
+                                    </div>  
+                                <% } %> 
+                                <!-- collapse four end -->
+                            </div>
+                            <!-- end accordian -->
+                        </div>
+                        <div class="col-lg-5  mb-1">
+                            <h5 class="mt-0 font-18 mb-1"><i class="ti-agenda text-primary mr-2"></i>Nhà gái</h5>
+                            <div class="accordion" id="accordionExample2">
+                                <% for (var i = 0, len =  data.cfg.female.finances.length ; i < len; i++) {%>
+                                    <div class="card mb-0">
+                                        <a data-toggle="collapse" href="#collapse_<%= i+data.cfg.male.finances.length %>" class="faq <%=  i == 0 ? 'collapsed' : '' %>" aria-expanded="true"
+                                            aria-controls="collapse_<%= i+data.cfg.male.finances.length %>">
+                                            <div class="card-header text-dark" id="heading_<%= i+data.cfg.male.finances.length %>">
+                                                <h5 class="m-0 faq-question"><%= data.cfg.female.finances[i].provider_name %></h5>
+                                            </div>
+                                        </a>
+                                        <div id="collapse_<%= i+data.cfg.male.finances.length %>" class="collapse <%=  i == 0 ? 'show' : '' %>" 
+                                            aria-labelledby="heading_<%= i+ data.cfg.male.finances.length %>"
+                                            data-parent="#accordionExample2">
+                                            <div class="card-body copy">
+                                                <p class="text-muted mb-0 faq-ans">
+                                                    STK: <b><%= data.cfg.female.finances[i].provider_number %></b>
+                                                    <br>
+                                                    NAME: <%= data.cfg.female.finances[i].holder_name %>
+                                                   <img src="<%= data.cfg.female.finances[i].female_bank %>" alt="Female Bank" style="max-width: 250px; height: auto;">
+                                                </p>
+                                                <div class="copy">
+                                                    <button
+                                                        class="btn btn-primary dropdown-toggle arrow-none waves-effect waves-light"
+                                                        type="button" data-toggle="dropdown" aria-haspopup="true"
+                                                        aria-expanded="false" data-clipboard-text="<%= data.cfg.female.finances[i].provider_number %>">
+                                                        <i class="fas fa-copy mr-2"></i>
+                                                        Copy
+                                                    </button>
+                                                </div>
+                                            </div>
+    
+                                        </div>
+                                    </div>  
+                                <% } %> 
+                            </div>
+                            <!-- end accordian -->
+                        </div>
+                    </div>
+                    <!-- end row -->
+                    <div class="text-center mb-0">
+                        <a href="/invitation">
+                            <button type="button" class="btn btn-success mb-0 waves-effect waves-light">
+                                Back
+                            </button>
+                        </a>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+    <!-- end error page -->
+    <!-- jQuery  -->
+    <script src="/assets/js/jquery.min.js"></script>
+    <script src="/assets/js/bootstrap.bundle.min.js"></script>
+    <script src="/assets/js/metisMenu.min.js"></script>
+    <script src="/assets/js/jquery.slimscroll.js"></script>
+    <script src="/assets/js/waves.min.js"></script><!-- App js -->
+    <script src="/assets/js/app.js"></script>
+    <script src="/assets/js/live/invite/fonts.handle.js"></script>
+    <script src="/plugins/clipboard/dist/clipboard.min.js"></script>
+    <script src="/plugins/toastr/toastr.min.js"></script> 
+    <script src="/assets/js/base/notify.js"></script>
+    
+    <script type="text/javascript">
+        var clipboard = new ClipboardJS('.btn');
+
+        clipboard.on('success', function (e) {
+            notify.push("Copied", notify.EType.SUCCESS);
+        });
+    </script>
+</body>
+
+</html>
